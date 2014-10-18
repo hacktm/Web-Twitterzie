@@ -1,6 +1,7 @@
 var evolve = require('./App_Skeleton.js').evolve;
 var testInput = require('./testInput.js');
 var tweets = require('../twiter pull/tweet.js').tweets();
+var compare = require('./Compare.js').compare;
 
 var counter = 9999;
 
@@ -49,24 +50,7 @@ var testText = function(){
 //		}
 	}
 	
-	var compare = function(chromozome1, chromozome2){
-		var fitness = 0;
-		var ending1 = chromozome1.substr(chromozome1.length-3, 3);
-		var ending2 = chromozome2.substr(chromozome2.length-3, 3);
-		if(ending1 == ending2){
-			fitness += 150;
-		} else if (ending1.substr(1, 2) == ending2.substr(1, 2)){
-			fitness += 125;
-		} else if(ending1.substr(2, 1) == ending2.substr(2, 1)){
-			fitness += 100;
-		}
-		if(fitness > 0){
-			len1 = chromozome1.length;
-			len2 = chromozome2.length;
-			fitness -= Math.abs(len1 - len2);
-		}
-		return fitness;
-	}
+
 	
 	var verseSearch= function(verse, list){
 		for (var v in list){
