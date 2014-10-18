@@ -11,7 +11,6 @@ module.exports.add = function(verse){
 	client.sadd(redisSet, verse, redis.print);
 }
 
-<<<<<<< Updated upstream
 module.exports.allVerse = function(callback){
 	client.smembers(redisSet, callback);
 //	return client.smembers(redisSet, function(err,results) {
@@ -19,14 +18,6 @@ module.exports.allVerse = function(callback){
 //			console.log('--- ' + results[i]);
 //		}
 //	});
-=======
-module.exports.allVerse = function(){
-	return client.smembers(redisSet, function(err,results) {
-		for(var i in results){
-			console.log('--- ' + results[i]);
-		}
-	});
->>>>>>> Stashed changes
 }
 
 module.exports.save = function(){
