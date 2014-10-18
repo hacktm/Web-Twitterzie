@@ -17,8 +17,11 @@ var replaces = [
                		{find:'\s9\s', replace:" noua "},
                		{find:'\s10\s', replace:" zece "},
                		//{find:'https?://[^\s]*', replace:""}, //remove
-               		{find:'[^0-9a-z]+$', replace:""} //remove           		
-               		
+               		{find:'[^0-9a-z]+$', replace:""}, //remove strange chars from end   
+                 	{find:'@[^\s]+', replace:""},
+                 	{find:'#[^\s]+', replace:""},
+                 	{find:'^RT ', replace:""}
+                 	
               ];
 
 var filters = [
@@ -46,6 +49,17 @@ module.exports.preetyTweet = function(tweet){
 		return false;
 	}
 	return tweet;
+}
+
+module.exports.split = function(tweet){
+	tweets = tweet.split(RegExp('(?:(?:\.+|\!+|\?+)(?:\s+|\s?$))'));
+	result = [];
+	for(i in tweets){
+		if(trim(tweets[i]) != ""){
+			result.push(trim(tweets[i]));
+		}
+	}
+	return result;
 }
 
 module.exports.preetyTweets = function(tweets){
