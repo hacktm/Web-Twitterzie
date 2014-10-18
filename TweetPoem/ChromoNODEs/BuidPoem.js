@@ -2,33 +2,57 @@ var evolve = require('./GeNODE.js').evolve;
 var testInput = require('./testInput.js');
 var tweets = require('../Tweeter/tweet.js').tweets();
 
-var counter = 99;
+var counter = 99999;
+
+function trim(s){
+	return s.replace(/^\s+|\s+$/g, '');
+}
 
 var testText = function(){
-	for(var i in testInput){
-		var chromozome = new Chromozome();
-		chromozome.genes = testInput[i];
-		outstanding.push(chromozome);
-	}
-//	var chromozome = new Chromozome();
-//	chromozome.genes = 'zero';
-//	outstanding.push(chromozome);
-//	
-//	var chromozome = new Chromozome();
-//	chromozome.genes = 'unu';
-//	outstanding.push(chromozome);
-//	
-//	var chromozome = new Chromozome();
-//	chromozome.genes = 'doi';
-//	outstanding.push(chromozome);
-//	
-//	var chromozome = new Chromozome();
-//	chromozome.genes = 'trei';
-//	outstanding.push(chromozome);
-//	
-//	var chromozome = new Chromozome();
-//	chromozome.genes = 'patru';
-//	outstanding.push(chromozome);
+//	for(var i in testInput){
+//		var chromozome = new Chromozome();
+//		chromozome.genes = trim(testInput[i]);
+//		outstanding.push(chromozome);
+//	}
+	var chromozome = new Chromozome();
+	chromozome.genes = 'zero';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'unu';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'doi';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'trei';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'patru';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'cinci';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'sase';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'sapte';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'opt';
+	outstanding.push(chromozome);
+	
+	var chromozome = new Chromozome();
+	chromozome.genes = 'noua';
+	outstanding.push(chromozome);
 }
 
 //tweets.then(function(tweets){
@@ -40,10 +64,11 @@ var testText = function(){
 	
 	var init = function(chormozomesPool){
 		outstanding = [];
+		testText();
 	};
 	
 	var mating = function(chromozomesPool){
-		testText();
+		
 //		for(var tweet in tweets){
 //			// TO DO : Scoatem tweeturile ce contin lincuri
 //			var chromozome = new Chromozome();
@@ -158,19 +183,13 @@ var testText = function(){
 	}
 	
 	var mutation = function(chormozomesPool){
-		var ratio = Math.floor(0.25 * (chromozomesPool.length-1));
+		var ratio = Math.floor(0.25 * (chormozomesPool.length-1));
 		var neibhours = function(verse, rand, lower, upper){
 			var bestDistance = 0;
-			for(var j = rand-lower; j<chromozomesPool.length && j<=rand+upper; j++){
-				
-				var distance = compare(verse, chromozomesPool[j]);							
-				var previouseDistance = 0;
-				
-				if(j!=rand){
-					previouseDistance = compare(chromozomesPool[rand], chromozomesPool[j]);
-				}							
-				
-				if(distance > previouseDistance){
+			var index = 0;
+			for(var j = rand-lower; j<chormozomesPool.length && j<=rand+upper; j++){
+				var distance = compare(verse, chormozomesPool[j]);													
+				if(distance > bestDistance){
 					bestDistance = distance;
 				}
 			}
@@ -178,23 +197,24 @@ var testText = function(){
 		}
 		
 		for(var i=0; i<ratio; i++){
-			var rand1 = Math.round(Math.random() * (chromozomesPool.length-1));
-			var rand2 = Math.round(Math.random() * (chromozomesPool.length-1));
+			var rand1 = Math.round(Math.random() * (chormozomesPool.length-1));
+			var rand2 = Math.round(Math.random() * (chormozomesPool.length-1));
 			var chr = chormozomesPool[rand1];
+			var len = chormozomesPool.length;
 			
 			switch (rand1) {
-				case 0 : distance1 = neibhours(chr, rand, 0, 2); break;
-				case 1 : distance1 = neibhours(chr, rand, 1, 2); break;
-				case len-1 : distance1 = neibhours(chr, rand, 2, 1 ); break;		
-				case len : distance1 = neibhours(chr, rand, 2, 0 ); break;		
-				default: distance1 = neibhours(chr, rand, 2, 2 ); break;
+				case 0 : distance1 = neibhours(chr, rand1, 0, 2); break;
+				case 1 : distance1 = neibhours(chr, rand1, 1, 2); break;
+				case len-1 : distance1 = neibhours(chr, rand1, 2, 1 ); break;		
+				case len : distance1 = neibhours(chr, rand1, 2, 0 ); break;		
+				default: distance1 = neibhours(chr, rand1, 2, 2 ); break;
 			}		
 
 			switch (rand2) {
-				case 0 : distance1 = neibhours(chr, rand, 0, 1); break;
-				case 1 : distance1 = neibhours(chr, rand, 1, 1); break;
-				case len : distance1 = neibhours(chr, rand, 2, 0 ); break;		
-				default: distance1 = neibhours(chr, rand, 2, 1 ); break;
+				case 0 : distance2 = neibhours(chr, rand2, 0, 1); break;
+				case 1 : distance2 = neibhours(chr, rand2, 1, 1); break;
+				case len : distance2 = neibhours(chr, rand2, 2, 0 ); break;		
+				default: distance2 = neibhours(chr, rand2, 2, 1 ); break;
 			}
 			
 			if(distance2 > distance1){
