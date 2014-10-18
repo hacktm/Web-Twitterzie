@@ -7,12 +7,21 @@ var T = new Twit({
   , access_token_secret:  'PgkW7SvWVJlLfjUA3OcImhgZTdJj8Rw2f7k3nMqlLKckZ'
 });
 
-var stream = T.stream('statuses/filter', 
-		{ 
-			track: 'java', 
-			language: 'ru' 
-		})
 
-stream.on('tweet', function (tweet) {
-  console.log(tweet.text)
-})
+var tags = ['pe', 'sa', 'de', 'a'];
+var streams = [];
+var language = 'ro';
+
+//Create streams
+for(i in tags){
+	var stream = T.stream('statuses/filter',
+			{
+				track: tags[i],
+				language: language
+			});
+	stream.on('tweet', function (tweet) {
+		  console.log(tweet.text)
+		});
+		
+	streams.push(stream);	
+}
