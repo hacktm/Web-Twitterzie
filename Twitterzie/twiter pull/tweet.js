@@ -17,7 +17,7 @@ module.exports.tweets = function(word, date, count, lang){
 		count : 100,
 	}, function(err, data, response) {
 		if (data != undefined) {
-			console.log(data.statuses.length)
+//			console.log(data.statuses.length)
 			def.resolve(data.statuses);
 		}
 	});
