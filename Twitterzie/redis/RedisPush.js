@@ -34,9 +34,17 @@ module.exports.allOut = function(callback){
 }
 
 module.exports.clearSet = function(callback){
-	client.sdiffstore(redisSet ,redis.print);
+	client.del(redisSet , callback);
 }
 
-module.exports.save = function(){
-	client.save(redis.print);
+module.exports.clearChr = function(callback){
+	client.del(pool , callback);
+}
+
+module.exports.clearOut = function(callback){
+	client.del(outstanding , callback);
+}
+
+module.exports.save = function(callback){
+	client.save(callback);
 }
