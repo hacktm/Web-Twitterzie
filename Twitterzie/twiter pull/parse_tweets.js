@@ -1,6 +1,3 @@
-/**
- * New node file
- */
 var tweets = require('../genetic engine/testInput.js');
 
 trim = function (s){
@@ -38,7 +35,7 @@ filterTweet = function(tweet){
 	return false;
 }
 
-preetyTweet = function(tweet){
+module.exports.preetyTweet = function(tweet){
 	tweet = trim(tweet);
 	
 	for(key in replaces){
@@ -51,7 +48,7 @@ preetyTweet = function(tweet){
 	return tweet;
 }
 
-preetyTweets = function(tweets){
+module.exports.preetyTweets = function(tweets){
 	var result = [];
 	for(id in tweets){
 		var niceTweet = preetyTweet(tweets[id]);
@@ -62,5 +59,5 @@ preetyTweets = function(tweets){
 	return result;
 }
 
-tweets = preetyTweets(tweets);
-console.log(tweets);
+//tweets = module.exports.preetyTweets(tweets);
+//console.log(tweets);

@@ -8,11 +8,18 @@ client.on("error", function (err) {
 });
 
 module.exports.add = function(verse){
-	client.sadd(redisSet, verse);
+	client.sadd(redisSet, verse, redis.print);
 }
 
-module.exports.allVerse = function(){
-	return client.smembers(redisSet, redis.print);
+module.exports.allVerse = function(callback){
+	callback();
+//	return client.smembers(redisSet, function(err,results) {
+//		for(var i in results){
+//			console.log('--- ' + results[i]);
+//		}
+//	});
 }
 
-
+module.exports.save = function(){
+	client.save(redis.print);
+}

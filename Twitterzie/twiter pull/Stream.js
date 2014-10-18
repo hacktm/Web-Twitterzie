@@ -1,4 +1,6 @@
 Twit = require('twit');
+preetyTweet = require('./parse_tweets.js').preetyTweet;
+redis = require('../redis/RedisPush.js');
 
 var T = new Twit({
     consumer_key:         'zLzozcD797pm3A4pQf09DhwrI'
@@ -8,7 +10,7 @@ var T = new Twit({
 });
 
 
-var tags = ['pe', 'sa', 'de', 'a'];
+var tags = ['pe', 'sa', 'de', 'a', 'in', 'dar', 'iar', 'la'];
 var streams = [];
 var language = 'ro';
 
@@ -20,8 +22,12 @@ for(i in tags){
 				language: language
 			});
 	stream.on('tweet', function (tweet) {
-		  console.log(tweet.text);
-//		  parse
+		  var tweet = preetyTweet(tweet.text);
+		  if(tweet){
+			  console.log(tweet);
+			  redis.add(tweet);
+			  redis.save();
+		  }
 //		  insert
 //		  update in memory instance
 // 		  sparately write to a file poem
