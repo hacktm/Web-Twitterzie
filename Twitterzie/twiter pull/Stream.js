@@ -20,8 +20,12 @@ for(i in tags){
 				language: language
 			});
 	stream.on('tweet', function (tweet) {
-		  console.log(tweet.text)
-		});
-		
+		  console.log(tweet.text);
+//		  parse
+//		  insert
+//		  update in memory instance
+// 		  sparately write to a file poem
+	});
+	
 	streams.push(stream);	
 }
