@@ -7,22 +7,45 @@ trim = function (s){
 	return s.replace(/^\s+|\s+$/g, '');
 }
 
-filterLinkTweet = function(tweet){ 
-	if( tweet.indexOf('http://') != -1 || tweet.indexOf('https://') != -1){
-		return true;
-	} 
+var replaces = [
+               		{find:'\s0\s', replace:" zero "},
+               		{find:'\s1\s', replace:" unu "},
+               		{find:'\s2\s', replace:" doi "},
+               		{find:'\s3\s', replace:" trei "},
+               		{find:'\s4\s', replace:" patru "},
+               		{find:'\s5\s', replace:" cinci "},
+               		{find:'\s6\s', replace:" sase "},
+               		{find:'\s7\s', replace:" sapte "},
+               		{find:'\s8\s', replace:" opt "},
+               		{find:'\s9\s', replace:" noua "},
+               		{find:'\s10\s', replace:" zece "},
+               		//{find:'https?://[^\s]*', replace:""}, //remove
+               		{find:'[^0-9a-z]+$', replace:""} //remove           		
+               		
+              ];
+
+var filters = [
+               		{find:"https?://"}
+              ];
+
+filterTweet = function(tweet){ 
+	for(key in filters){
+		if( tweet.search(new RegExp(filters[key].find)) != -1 ){
+			return true;
+		}
+	}
+	
 	return false;
 }
 
 preetyTweet = function(tweet){
-	//remove some stuff 
-	
 	tweet = trim(tweet);
 	
-	//tweet = tweet.replace(new RegExp('https?://[^\s]*'), '');
-	tweet = tweet.replace(new RegExp('[^0-9a-z]+$'), '');
+	for(key in replaces){
+		tweet = tweet.replace(new RegExp(replaces[key].find), replaces[key].replace);
+	}	
 	
-	if(filterLinkTweet(tweet)){
+	if(filterTweet(tweet)){
 		return false;
 	}
 	return tweet;

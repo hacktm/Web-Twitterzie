@@ -8,6 +8,6 @@ var redis = require("redis"),
         console.log("Error " + err);
     });
 
-    client.set("string key", "string val", redis.print);
+//    client.set("string key", "string val", redis.print);
     client.get("string key", redis.print);
 //    client.hset("hash key", "hashtest 1", "some value", redis.print);
