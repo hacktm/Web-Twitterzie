@@ -3,6 +3,7 @@ var testInput = require('./testInput.js');
 var tweets = require('../twiter pull/tweet.js').tweets();
 var compare = require('./Compare.js').compare;
 
+module.exports.outstanding = [];
 var counter = 99;
 
 function trim(s){
@@ -11,8 +12,8 @@ function trim(s){
 
 var testText = function(){
 	for(var i in testInput){
-		if(!verseSearch(testInput[i], outstanding)){
-			outstanding.push(trim(testInput[i]));
+		if(!verseSearch(testInput[i], module.exports.outstanding)){
+			module.exports.outstanding.push(trim(testInput[i]));
 		}
 	}
 
@@ -36,7 +37,6 @@ var testText = function(){
 //	};
 	
 	var init = function(chormozomesPool){
-		outstanding = [];
 		testText();
 	};
 	
@@ -49,8 +49,6 @@ var testText = function(){
 //			outstanding.push(chromozome);
 //		}
 	}
-	
-
 	
 	var verseSearch= function(verse, list){
 		for (var v in list){
@@ -81,8 +79,8 @@ var testText = function(){
 	var chromozomeSelection = function(chromozomesPool){
 		var limit = 200;
 		if(chromozomesPool.length < limit){
-			for(var i=0 ; i<limit && outstanding.length; i++){
-				chormozomesPool.push(outstanding.pop());
+			for(var i=0 ; i<limit && module.exports.outstanding.length; i++){
+				chormozomesPool.push(module.exports.outstanding.pop());
 			}
 		}else{
 			
@@ -103,8 +101,8 @@ var testText = function(){
 				}
 			}
 			
-			for(var i = 0; i<outstanding.length; i++){
-				var verse = outstanding.pop();
+			for(var i = 0; i<module.exports.outstanding.length; i++){
+				var verse = module.exports.outstanding.pop();
 				
 				if(!verseSearch(verse, chromozomesPool)){
 					var len = chromozomesPool.length;
@@ -122,7 +120,7 @@ var testText = function(){
 						chormozomesPool.splice(rand, 0, verse);
 					}else{
 						//add back
-						outstanding.splice(0, 0, verse);
+						module.exports.outstanding.splice(0, 0, verse);
 					}
 				}
 			}		
@@ -130,7 +128,7 @@ var testText = function(){
 	}
 	
 	var mutation = function(chormozomesPool){
-		var ratio = Math.floor(0.25 * (chormozomesPool.length-1));
+		var ratio = Math.floor(0.30 * (chormozomesPool.length-1));
 		var neibhours = function(verse, rand, lower, upper){
 			var bestDistance = 0;
 			var index = 0;
@@ -176,18 +174,21 @@ var testText = function(){
 	}
 	
 	var stopCriteria = function(chromozomesPool){
+//		console.log(counter);
 		console.log(chromozomesPool);
-		console.log(counter);
-		return --counter;
+		return false;
+//		return --counter;
 	}
 	
-	var evolvedChromozomes = evolve({
-		init : init,
-		mating : mating,
-		chromozomeSelection : chromozomeSelection,	
-		mutation : mutation,				
-		stopCriteria : stopCriteria	
-	});
+//	module.exports.evolve = function(){
+		evolve({
+			init : init,
+			mating : mating,
+			chromozomeSelection : chromozomeSelection,	
+			mutation : mutation,				
+			stopCriteria : stopCriteria	
+		});
+//	}
 	
 //	console.log(evolvedChromozomes.outstanding);
 //});

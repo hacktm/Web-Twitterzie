@@ -1,6 +1,7 @@
 Twit = require('twit');
 preetyTweet = require('./parse_tweets.js').preetyTweet;
 redis = require('../redis/RedisPush.js');
+gEngine = require('../genetic engine/G_Engine.js');
 
 var T = new Twit({
     consumer_key:         'zLzozcD797pm3A4pQf09DhwrI'
@@ -8,7 +9,6 @@ var T = new Twit({
   , access_token:         '23079109-aA3ZzSvf1lr0Mem1ocvvHEvcWTme4qHncFVbZe7tb'
   , access_token_secret:  'PgkW7SvWVJlLfjUA3OcImhgZTdJj8Rw2f7k3nMqlLKckZ'
 });
-
 
 var tags = ['pe', 'sa', 'de', 'a', 'in', 'dar', 'iar', 'la'];
 var streams = [];
@@ -24,11 +24,12 @@ for(i in tags){
 	stream.on('tweet', function (tweet) {
 		  var tweet = preetyTweet(tweet.text);
 		  if(tweet){
-			  console.log(tweet);
-			  redis.add(tweet);
-			  redis.save();
+//			  console.log(tweet);
+//			  redis.add(tweet);
+//			  redis.save();
+			  gEngine.outstanding.push(tweet);
+			  gEngine.evolve();
 		  }
-//		  insert
 //		  update in memory instance
 // 		  sparately write to a file poem
 	});

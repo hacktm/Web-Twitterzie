@@ -1,6 +1,3 @@
-/**
- * New node file
- */
 var vowels = ['a', 'e', 'i', 'o', 'u']
 
 var size = function(verse){
