@@ -1,12 +1,18 @@
 var redis = require("redis");
 var client = redis.createClient();
 
+var redisSet = 'versuriTest';
+
 client.on("error", function (err) {
 	console.log("Error " + err);
 });
 
-client.sadd("versuriTest", "test1", redis.print);
-client.sadd("versuriTest", "test2", redis.print);
-var versuri = client.smembers("versuriTest", redis.print);
-console.log(versuri);
+module.exports.add = function(verse){
+	client.sadd(redisSet, verse);
+}
+
+module.exports.allVerse = function(){
+	return client.smembers(redisSet, redis.print);
+}
+
 
