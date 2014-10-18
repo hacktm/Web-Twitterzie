@@ -3,29 +3,29 @@ var testInput = require('./testInput.js');
 var tweets = require('../twiter pull/tweet.js').tweets();
 var compare = require('./Compare.js').compare;
 
-var counter = 9999;
+var counter = 99;
 
 function trim(s){
 	return s.replace(/^\s+|\s+$/g, '');
 }
 
 var testText = function(){
-//	for(var i in testInput){
-//		if(!verseSearch(testInput[i], outstanding)){
-//			outstanding.push(trim(testInput[i]));
-//		}
-//	}
+	for(var i in testInput){
+		if(!verseSearch(testInput[i], outstanding)){
+			outstanding.push(trim(testInput[i]));
+		}
+	}
 
-	outstanding.push('zero');
-	outstanding.push('unu');
-	outstanding.push('doi');
-	outstanding.push('trei');
-	outstanding.push('patru');
-	outstanding.push('cinci');
-	outstanding.push('sase');
-	outstanding.push('sapte');
-	outstanding.push('opt');
-	outstanding.push('noua');
+//	outstanding.push('zero');
+//	outstanding.push('unu');
+//	outstanding.push('doi');
+//	outstanding.push('trei');
+//	outstanding.push('patru');
+//	outstanding.push('cinci');
+//	outstanding.push('sase');
+//	outstanding.push('sapte');
+//	outstanding.push('opt');
+//	outstanding.push('noua');
 }
 
 //tweets.then(function(tweets){
