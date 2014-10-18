@@ -1,4 +1,6 @@
-module.exports = ["@ilMircu ar fi mersi de minune. Dar se serveau in locatii diferite :))",
+module.exports = ["Deci sunt barbatul magic! Am facut supa cu galusti fara galusti!",
+                  "S-au zdrobit toate in #plm.",
+                  "@ilMircu ar fi mersi de minune. Dar se serveau in locatii diferite :))",
                   "Am postat o fotografie nouă pe Facebook http://t.co/HY0DV3zVv2",
                   "Am postat o fotografie nouă pe Facebook http://t.co/aoZE2wIU1M",
                   "Blogsale: RO:         Primul meu blogsale, cu lucruri pe care vreau sa le dau, pentru  a face loc altora. Pret... http://t.co/KHjzRP0uAH",

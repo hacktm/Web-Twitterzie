@@ -1,13 +1,13 @@
 Twit = require('twit');
 preetyTweet = require('./parse_tweets.js').preetyTweet;
 redis = require('../redis/RedisPush.js');
-//gEngine = require('../genetic engine/G_Engine.js');
+gEngine = require('../genetic engine/G_Engine.js');
 
 var T = new Twit({
-    consumer_key:         'zLzozcD797pm3A4pQf09DhwrI'
-  , consumer_secret:      '45uPRGtGTMDwAMADF7oXVuCZgp00zGg2Z09VhqoG5VEsZaaIwE'
-  , access_token:         '23079109-aA3ZzSvf1lr0Mem1ocvvHEvcWTme4qHncFVbZe7tb'
-  , access_token_secret:  'PgkW7SvWVJlLfjUA3OcImhgZTdJj8Rw2f7k3nMqlLKckZ'
+    consumer_key:         'tTbrrQhSo32qm8A0ErsFge9xL'
+  , consumer_secret:      'oYb5q5li414MyY3b0H9hmQQo86XaNbcXlQq8BsEHN7qBCZepRy'
+  , access_token:         '2836469279-JzdtzTvuZhpBNiG5YoGWxHfKS1bvEkSwWnWWrZM'
+  , access_token_secret:  'BifIasnWiFbQC6oQNtld47uMW3Q0W0BcUDhxz71cGqIxN'
 });
 
 var tags = ['pe', 'sa', 'de', 'a', 'in', 'dar', 'iar', 'la'];
@@ -23,15 +23,13 @@ for(i in tags){
 			});
 	
 	stream.on('tweet', function (tweet) {
-		console.log(tweet.text);
 		  var tweet = preetyTweet(tweet.text);
 		  console.log(tweet);
 		  if(tweet){
 //			  console.log(tweet);
-//			  redis.add(tweet);
+//			  redis.addVerse(tweet);
 //			  redis.save();
-//			  gEngine.outstanding.push(tweet);
-//			  gEngine.evolution();
+			  gEngine.evolution(tweet);
 		  }
 //		  update in memory instance
 // 		  sparately write to a file poem
@@ -39,3 +37,5 @@ for(i in tags){
 	
 	streams.push(stream);	
 }
+
+stream.emit('tweet', { text : 'Ana are mere'});
