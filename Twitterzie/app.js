@@ -1,4 +1,4 @@
-var stream = require('./twiter pull/StreamVlad.js');
+var stream = require('./twiter pull/Stream.js');
 stream.run();
 var pool = stream.pool;
 var express = require('express');
