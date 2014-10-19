@@ -12,32 +12,6 @@ function trim(s) {
 	return s.replace(/^\s+|\s+$/g, '');
 }
 
-// var testText = function(){
-// for(var i in testInput){
-// if(!verseSearch(testInput[i], outstanding)){
-// outstanding.push(trim(testInput[i]));
-// }
-// }
-
-// outstanding.push('zero');
-// outstanding.push('unu');
-// outstanding.push('doi');
-// outstanding.push('trei');
-// outstanding.push('patru');
-// outstanding.push('cinci');
-// outstanding.push('sase');
-// outstanding.push('sapte');
-// outstanding.push('opt');
-// outstanding.push('noua');
-// }
-
-// tweets.then(function(tweets){
-
-// var Chromozome = function(){
-// this.fitness = 0;
-// this.genes = null;
-// };
-
 module.exports.evolution = function(tweet) {
 
 var verseSearch = function(verse, list) {
@@ -52,12 +26,12 @@ var verseSearch = function(verse, list) {
 var neibhours = function(rand, lower, upper, chromozomesPool) {
 	for (var j = rand - lower; j < chromozomesPool.length && j <= rand + upper; j++) {
 
-		var distance = compare(verse, chromozomesPool[j]);
+		var distance = compare(verse, chromozomesPool[j], rand, j);
 		var previouseDistance = 0;
 
 		if (j != rand) {
 			previouseDistance = compare(chromozomesPool[rand],
-					chromozomesPool[j]);
+					chromozomesPool[j], rand, j);
 		}
 
 		if (distance > previouseDistance) {
@@ -69,7 +43,7 @@ var neibhours = function(rand, lower, upper, chromozomesPool) {
 
 var chromozomeSelection = function(chromozomesPool) {
 	var keepChromozome = false;
-	var limit = 10;
+	var limit = 200;
 	if (chromozomesPool.length < limit) {
 		while (!verseSearch(tweet, chromozomesPool) && chromozomesPool.length < limit) {
 			chromozomesPool.push(tweet);
@@ -80,12 +54,12 @@ var chromozomeSelection = function(chromozomesPool) {
 			for (var j = rand - lower; j < chromozomesPool.length
 					&& j <= rand + upper; j++) {
 
-				var distance = compare(tweet, chromozomesPool[j]);
+				var distance = compare(tweet, chromozomesPool[j], rand , j);
 				var previouseDistance = 0;
 
 				if (j != rand) {
 					previouseDistance = compare(chromozomesPool[rand],
-							chromozomesPool[j]);
+							chromozomesPool[j], rand, j);
 				}
 
 				if (distance > previouseDistance) {
@@ -114,6 +88,21 @@ var chromozomeSelection = function(chromozomesPool) {
 				neibhours(rand, 2, 1);
 				break;
 			}
+			
+//			switch (rand) {
+//			case 0:
+//				neibhours(rand, 0, 1);
+//				break;
+//			case 1:
+//				neibhours(rand, 1, 1);
+//				break;
+//			case len:
+//				neibhours(rand, 1, 0);
+//				break;
+//			default:
+//				neibhours(rand, 1, 1);
+//				break;
+//			}
 
 			if (keepChromozome) {
 				chromozomesPool.splice(rand, 0, tweet);
@@ -131,7 +120,7 @@ var mutation = function(chormozomesPool) {
 		for (var j = rand - lower; j < chormozomesPool.length
 				&& j <= rand + upper; j++) {
 			if (j != rand) {
-				var distance = compare(verse, chormozomesPool[j]);
+				var distance = compare(verse, chormozomesPool[j], rand, j);
 				if (distance > bestDistance) {
 					bestDistance = distance;
 				}
@@ -178,6 +167,39 @@ var mutation = function(chormozomesPool) {
 			distance2 = neibhours(chr, rand2, 2, 1);
 			break;
 		}
+		
+//		switch (rand1) {
+//		case 0:
+//			distance1 = neibhours(chr, rand1, 0, 1);
+//			break;
+//		case 1:
+//			distance1 = neibhours(chr, rand1, 1, 1);
+//			break;
+//		case len - 1:
+//			distance1 = neibhours(chr, rand1, 1, 1);
+//			break;
+//		case len:
+//			distance1 = neibhours(chr, rand1, 1, 0);
+//			break;
+//		default:
+//			distance1 = neibhours(chr, rand1, 1, 1);
+//			break;
+//		}
+//
+//		switch (rand2) {
+//		case 0:
+//			distance2 = neibhours(chr, rand2, 0, 1);
+//			break;
+//		case 1:
+//			distance2 = neibhours(chr, rand2, 1, 1);
+//			break;
+//		case len:
+//			distance2 = neibhours(chr, rand2, 1, 0);
+//			break;
+//		default:
+//			distance2 = neibhours(chr, rand2, 2, 1);
+//			break;
+//		}
 
 		if (distance2 > distance1) {
 			// sweep
