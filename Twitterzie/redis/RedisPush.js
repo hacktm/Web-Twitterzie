@@ -2,12 +2,17 @@ var redis = require("redis");
 var client = redis.createClient();
 
 var redisSet = 'versuriTest';
+var redisSetFinal = 'versuriFinal';
 var pool = 'pool';
 var outstanding = 'outstanding';
 
 client.on("error", function (err) {
 	console.log("Error " + err);
 });
+
+module.exports.addFinal = function(verse){
+	client.sadd(redisSetFinal, verse);
+}
 
 module.exports.addVerse = function(verse){
 	client.sadd(redisSet, verse);
