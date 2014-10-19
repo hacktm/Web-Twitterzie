@@ -6,6 +6,8 @@ var q = require('q');
 
 module.exports.pool = gEngine.pool;
 
+module.exports.run = function(){
+	
 var T = new Twit({
 	consumer_key : 'tTbrrQhSo32qm8A0ErsFge9xL',
 	consumer_secret : 'oYb5q5li414MyY3b0H9hmQQo86XaNbcXlQq8BsEHN7qBCZepRy',
@@ -72,6 +74,8 @@ redis.allOut(function(err, results){
 setInterval(function(){
 	gEngine.evolution();
 }, 200);
+
+};
 
 //setInterval(function(){
 //	console.log(gEngine.pool);

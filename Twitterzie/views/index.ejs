@@ -1,11 +1,34 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+<meta charset="UTF-8">
+<title>Twitterzie ;)</title>
+<style>
+html, body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	height: 100%;
+	background-image: url("../img/bg_pattern.jpg");
+	background-attachment: fixed;
+}
+
+.center {
+	background-image: url("../img/papirus.png");
+	background-attachment: fixed;
+	background-position: 160px;
+	width: 1049px;
+	height: 922px;
+	padding: 50px;
+	box-sizing: border-box;
+	margin: auto;
+}
+</style>
+</head>
+<body>
+	<div class="center">
+		<% for(var i in poem){ %>
+			 <%= poem[i] %> <br/>
+		<% } %>
+	</div>
+</body>
 </html>

@@ -1,4 +1,5 @@
 var stream = require('./twiter pull/StreamVlad.js');
+stream.run();
 var pool = stream.pool;
 var express = require('express');
 var path = require('path');
@@ -6,7 +7,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var router = express.Router();
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -27,10 +28,7 @@ app.use('/', routes);
 app.use('/users', users);
 
 app.get('/poem', function(req, res){
-//	res.json('Ana are mere');
 	res.json(pool);
-	
-	
 });
 
 /// catch 404 and forward to error handler
