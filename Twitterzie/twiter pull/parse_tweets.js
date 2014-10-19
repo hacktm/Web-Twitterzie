@@ -20,6 +20,7 @@ var replaces = [
                		{find:'[^0-9a-z]+$', replace:""}, //remove strange chars from end   
                  	{find:'@[^\s]+', replace:""},
                  	{find:'#[^\s]+', replace:""},
+                 	{find:'&[^\s]+', replace:""},
                  	{find:'^RT ', replace:""}
                  	
               ];
