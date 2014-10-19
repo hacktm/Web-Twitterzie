@@ -55,15 +55,15 @@ for (i in tags) {
 	//streams.push(stream);
 }
 
-redis.allVerse(function(err, data){
-	if(err) console.error(err);
-	for(var x in data){
-		var kept = gEngine.evolution(parser.preetyTweet(data[x]));
-		if(!kept){
-			redis.addOut(parser.preetyTweet(data[x]));
-		}	
-	}
-});		
+//redis.allVerse(function(err, data){
+//	if(err) console.error(err);
+//	for(var x in data){
+//		var kept = gEngine.evolution(parser.preetyTweet(data[x]));
+//		if(!kept){
+//			redis.addOut(parser.preetyTweet(data[x]));
+//		}	
+//	}
+//});		
 
 redis.allOut(function(err, results){
 	console.log(results.length);

@@ -4,24 +4,24 @@ trim = function (s){
 	return s.replace(/^\s+|\s+$/g, '');
 }
 
-var replaces = [
-               		{find:'\s0\s', replace:" zero "},
-               		{find:'\s1\s', replace:" unu "},
-               		{find:'\s2\s', replace:" doi "},
-               		{find:'\s3\s', replace:" trei "},
-               		{find:'\s4\s', replace:" patru "},
-               		{find:'\s5\s', replace:" cinci "},
-               		{find:'\s6\s', replace:" sase "},
-               		{find:'\s7\s', replace:" sapte "},
-               		{find:'\s8\s', replace:" opt "},
-               		{find:'\s9\s', replace:" noua "},
-               		{find:'\s10\s', replace:" zece "},
+replaces = [
+               		{find:/\s0\s/, replace:" zero "},
+               		{find:/\s1\s/, replace:" unu "},
+               		{find:/\s2\s/, replace:" doi "},
+               		{find:/\s3\s/, replace:" trei "},
+               		{find:/\s4\s/, replace:" patru "},
+               		{find:/\s5\s/, replace:" cinci "},
+               		{find:/\s6\s/, replace:" sase "},
+               		{find:/\s7\s/, replace:" sapte "},
+               		{find:/\s8\s/, replace:" opt "},
+               		{find:/\s9\s/, replace:" noua "},
+               		{find:/\s10\s/, replace:" zece "},
                		//{find:'https?://[^\s]*', replace:""}, //remove
-               		{find:'[^0-9a-z]+$', replace:""}, //remove strange chars from end   
-                 	{find:'@[^\s]+', replace:""},
-                 	{find:'#[^\s]+', replace:""},
-                 	{find:'&[^\s]+', replace:""},
-                 	{find:'^RT ', replace:""}
+               		{find:/[^0-9a-z]+$/, replace:""}, //remove strange chars from end   
+                 	{find:/\@[^\s]+/, replace:""},
+                 	{find:/\#[^\s]+/, replace:""},
+                 	{find:/\&[^\s]+/, replace:""},
+                 	{find:/^RT /, replace:""}
                  	
               ];
 
@@ -82,6 +82,11 @@ module.exports.preetyTweets = function(tweets){
 	}
 	return result;
 }
+
+//var test = "text #mare si URAT. @gigel 3 na";
+//var result = module.exports.preetyTweet(test);
+//console.log(result);
+
 
 //tweets = module.exports.preetyTweets(tweets);
 //console.log(tweets);
