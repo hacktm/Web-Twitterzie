@@ -4,6 +4,8 @@ redis = require('../redis/RedisPush.js');
 gEngine = require('../genetic engine/G_Engine.js');
 var q = require('q');
 
+module.exports.pool = gEngine.pool;
+
 var T = new Twit({
 	consumer_key : 'tTbrrQhSo32qm8A0ErsFge9xL',
 	consumer_secret : 'oYb5q5li414MyY3b0H9hmQQo86XaNbcXlQq8BsEHN7qBCZepRy',
@@ -47,20 +49,33 @@ for (i in tags) {
 
 	streams.push(stream);
 }
-// DECOMENTEAZA
-//redis.allVerse(function(err, data){
-//	if(err) console.error(err);
-//	for(var x in data){
-//		var kept = gEngine.evolution(data[x]);
-//		if(!kept){
-//			redis.addOut(data[x]);
-//		}
-//	}
-//});		
-//DECOMENTEAZA
+
+redis.allVerse(function(err, data){
+	if(err) console.error(err);
+	for(var x in data){
+		var kept = gEngine.evolution(data[x]);
+		if(!kept){
+			redis.addOut(data[x]);
+		}	
+	}
+});		
+
+redis.allOut(function(err, results){
+	for(var i in results){
+		var kept = gEngine.evolution(results[i]);
+		if(kept){
+			redis.remOut(results[i]);
+		}
+	}
+});
+
+setInterval(function(){
+	gEngine.evolution();
+}, 200);
+
 //setInterval(function(){
-//	gEngine.evolution();
-//}, 100);
+//	console.log(gEngine.pool);
+//}, 2000);
 
 //stream.emit('tweet', {
 //	text : 'Ana are mere. Veta are pere. pui'

@@ -1,3 +1,5 @@
+var stream = require('./twiter pull/StreamVlad.js');
+var pool = stream.pool;
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -23,6 +25,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.get('/poem', function(req, res){
+//	res.json('Ana are mere');
+	res.json(pool);
+	
+	
+});
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,6 +63,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

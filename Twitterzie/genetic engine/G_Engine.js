@@ -1,4 +1,6 @@
-var evolve = require('./App_Skeleton.js').evolve;
+var skeleton = require('./App_Skeleton.js');
+var evolve = skeleton.evolve;
+var pool = skeleton.chormozomesPool;
 var testInput = require('./testInput.js');
 var tweets = require('../twiter pull/tweet.js').tweets();
 var compare = require('./Compare.js').compare;
@@ -70,7 +72,7 @@ var chromozomeSelection = function(chromozomesPool) {
 	var limit = 10;
 	if (chromozomesPool.length < limit) {
 		while (!verseSearch(tweet, chromozomesPool) && chromozomesPool.length < limit) {
-			chormozomesPool.push(tweet);
+			chromozomesPool.push(tweet);
 			keepChromozome = true;
 		}
 	} else {
@@ -114,7 +116,7 @@ var chromozomeSelection = function(chromozomesPool) {
 			}
 
 			if (keepChromozome) {
-				chormozomesPool.splice(rand, 0, tweet);
+				chromozomesPool.splice(rand, 0, tweet);
 			}
 		}
 	}
@@ -197,3 +199,5 @@ var mutation = function(chormozomesPool) {
 	}
 	
 };
+
+module.exports.pool = pool;

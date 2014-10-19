@@ -1,23 +1,20 @@
-chormozomesPool = [];
+module.exports.chormozomesPool = [];
 
 module.exports.evolve = function(options){
-	var Chromozome = options.Chromozome;
 	var init = options.init;
 	var chromozomeSelection = options.chromozomeSelection;	
-	var mating = options.mating;
 	var mutation = options.mutation;
-	var stopCriteria = options.stopCriteria;
 	var keepChromozome = false;
 		
 	if(chromozomeSelection){
-		keepChromozome = chromozomeSelection(chormozomesPool);
+		keepChromozome = chromozomeSelection(module.exports.chormozomesPool);
 	}
 		
 	if(mutation){
-		mutation(chormozomesPool);
+		mutation(module.exports.chormozomesPool);
 	}
 	
-//	console.log(chormozomesPool);	
+//	console.log(module.exports.chormozomesPool);	
 		
 	return keepChromozome;
 }
