@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var stream = require('../twiter pull/Stream.js');
 
-/* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { poem: stream.pool });
 });
 
 module.exports = router;

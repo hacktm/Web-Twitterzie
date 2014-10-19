@@ -33,7 +33,7 @@ filterTweet = function(tweet){
 	var words = tweet.split(' ');
 	var size = words.length;
 	
-	if(size < 3 || size > 10){
+	if(size < 3 || size > 7){
 		return true;
 	}
 	

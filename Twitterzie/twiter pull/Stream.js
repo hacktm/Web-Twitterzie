@@ -6,6 +6,8 @@ var q = require('q');
 
 module.exports.pool = gEngine.pool;
 
+module.exports.run = function(){
+	
 var T = new Twit({
 	consumer_key : 'tTbrrQhSo32qm8A0ErsFge9xL',
 	consumer_secret : 'oYb5q5li414MyY3b0H9hmQQo86XaNbcXlQq8BsEHN7qBCZepRy',
@@ -14,7 +16,7 @@ var T = new Twit({
 });
 
 var tags = [ 'pe', 'sa', 'de', 'a', 'in', 'dar', 'iar', 'la' ];
-var streams = [];
+//var streams = [];
 var language = 'ro';
 
 // Create streams
@@ -39,32 +41,32 @@ for (i in tags) {
 		
 		redis.allOut(function(err, results){
 			for(var i in results){
-				var kept = gEngine.evolution(results[i]);
+				var kept = gEngine.evolution(parser.preetyTweet(results[i]));
 				if(kept){
-					redis.remOut(results[i]);
+					redis.remOut(parser.preetyTweet(results[i]));
 				}
 			}
 		});
 	});
 
-	streams.push(stream);
+	//streams.push(stream);
 }
 
 redis.allVerse(function(err, data){
 	if(err) console.error(err);
 	for(var x in data){
-		var kept = gEngine.evolution(data[x]);
+		var kept = gEngine.evolution(parser.preetyTweet(data[x]));
 		if(!kept){
-			redis.addOut(data[x]);
+			redis.addOut(parser.preetyTweet(data[x]));
 		}	
 	}
 });		
 
 redis.allOut(function(err, results){
 	for(var i in results){
-		var kept = gEngine.evolution(results[i]);
+		var kept = gEngine.evolution(parser.preetyTweet(results[i]));
 		if(kept){
-			redis.remOut(results[i]);
+			redis.remOut(parser.preetyTweet(results[i]));
 		}
 	}
 });
@@ -73,10 +75,8 @@ setInterval(function(){
 	gEngine.evolution();
 }, 200);
 
+};
+
 //setInterval(function(){
 //	console.log(gEngine.pool);
 //}, 2000);
-
-//stream.emit('tweet', {
-//	text : 'Ana are mere. Veta are pere. pui'
-//});
