@@ -1,4 +1,4 @@
-var redis = require('./RedisPush.js');
+var redis = require('../redis/RedisPush.js');
 var parser = require('./parse_tweets.js');
 var initial = require('../genetic engine/testInput.js');
 

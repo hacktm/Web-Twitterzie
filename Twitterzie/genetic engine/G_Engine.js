@@ -113,7 +113,7 @@ var chromozomeSelection = function(chromozomesPool) {
 }
 
 var mutation = function(chormozomesPool) {
-	var ratio = Math.floor(1.0 * (chormozomesPool.length - 1));
+	var ratio = Math.floor(0.3 * (chormozomesPool.length - 1));
 	var neibhours = function(verse, rand, lower, upper) {
 		var bestDistance = 0;
 		var index = 0;

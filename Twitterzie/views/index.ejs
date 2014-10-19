@@ -3,6 +3,8 @@
 <meta charset="UTF-8">
 <title>Twitterzie ;)</title>
 <style>
+@import url(http://fonts.googleapis.com/css?family=Devonshire);
+
 html, body {
 	margin: 0px;
 	padding: 0px;
@@ -10,22 +12,36 @@ html, body {
 	height: 100%;
 	background-image: url("../img/bg_pattern.jpg");
 	background-attachment: fixed;
+	font-family: 'Devonshire', cursive;
+	font-size:16px;
 }
 
 .center {
 	background-image: url("../img/papirus.png");
-	background-attachment: fixed;
-	background-position: 160px;
 	width: 1049px;
 	height: 922px;
-	padding: 50px;
-	box-sizing: border-box;
-	margin: auto;
+	top: -70px;
+	left: 50%;
+
+	text-align: center;
+	position: fixed;
+	margin-left: -520px;
+}
+
+.text{
+	position:absolute;
+	width:900px;
+	padding-top:100px;
+	left: 50%;
+	margin-left:-450px;
+	text-align:center;
+	font-size:35px;
 }
 </style>
 </head>
 <body>
-	<div class="center">
+	<div class="center"></div>
+	<div class="text">
 		<% for(var i in poem){ %>
 			 <%= poem[i] %> <br/>
 		<% } %>

@@ -47,6 +47,9 @@ for (i in tags) {
 				}
 			}
 		});
+		
+//		stream.emit('tweet', {text: 'Ana are mere'});
+//		stream.emit('tweet', {text: 'Ana are pere'});
 	});
 
 	//streams.push(stream);
@@ -63,7 +66,8 @@ redis.allVerse(function(err, data){
 });		
 
 redis.allOut(function(err, results){
-	for(var i in results){
+	console.log(results.length);
+	for(var i = 0; i< results.length; i++){
 		var kept = gEngine.evolution(parser.preetyTweet(results[i]));
 		if(kept){
 			redis.remOut(parser.preetyTweet(results[i]));
@@ -76,6 +80,8 @@ setInterval(function(){
 }, 200);
 
 };
+
+
 
 //setInterval(function(){
 //	console.log(gEngine.pool);

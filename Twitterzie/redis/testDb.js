@@ -1,7 +1,7 @@
 var redis = require('./RedisPush.js');
 var fs = require('fs');
 
-redis.allVerse(function(err, results){
+redis.allFinal(function(err, results){
 	console.log(results);
 	console.log(results.length);
 	

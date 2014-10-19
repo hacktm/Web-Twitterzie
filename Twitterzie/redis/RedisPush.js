@@ -38,6 +38,10 @@ module.exports.allOut = function(callback){
 	client.smembers(outstanding, callback);
 }
 
+module.exports.allFinal = function(callback){
+	client.smembers(redisSetFinal, callback);
+}
+
 module.exports.clearSet = function(callback){
 	client.del(redisSet , callback);
 }
