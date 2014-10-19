@@ -7,16 +7,17 @@ module.exports.evolve = function(options){
 	var mating = options.mating;
 	var mutation = options.mutation;
 	var stopCriteria = options.stopCriteria;
+	var keepChromozome = false;
 		
 	if(chromozomeSelection){
-		chromozomeSelection(chormozomesPool);
+		keepChromozome = chromozomeSelection(chormozomesPool);
 	}
 		
 	if(mutation){
 		mutation(chormozomesPool);
 	}
 	
-	console.log(chormozomesPool);	
+//	console.log(chormozomesPool);	
 		
-	return chormozomesPool;
+	return keepChromozome;
 }

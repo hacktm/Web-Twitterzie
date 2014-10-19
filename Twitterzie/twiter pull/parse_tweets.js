@@ -52,7 +52,8 @@ module.exports.preetyTweet = function(tweet){
 }
 
 module.exports.split = function(tweet){
-	tweets = tweet.split(RegExp('(?:(?:\.+|\!+|\?+)(?:\s+|\s?$))'));
+//	tweets = tweet.split(RegExp('(?:(?:\.+|\!+|\?+)(?:\s+|\s?$))', 'gm'));
+	tweets = tweet.split(/(?:(?:\.+|\!+|\?+)(?:\s+|\s?$))/gm);
 	result = [];
 	for(i in tweets){
 		if(trim(tweets[i]) != ""){

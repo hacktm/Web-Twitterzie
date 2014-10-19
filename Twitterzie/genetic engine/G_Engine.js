@@ -2,6 +2,7 @@ var evolve = require('./App_Skeleton.js').evolve;
 var testInput = require('./testInput.js');
 var tweets = require('../twiter pull/tweet.js').tweets();
 var compare = require('./Compare.js').compare;
+var redis = require('../redis/RedisPush.js');
 
 var counter = 99;
 
@@ -65,17 +66,19 @@ var neibhours = function(rand, lower, upper, chromozomesPool) {
 }
 
 var chromozomeSelection = function(chromozomesPool) {
-	var limit = 200;
+	var keepChromozome = false;
+	var limit = 10;
 	if (chromozomesPool.length < limit) {
 		while (!verseSearch(tweet, chromozomesPool) && chromozomesPool.length < limit) {
 			chormozomesPool.push(tweet);
+			keepChromozome = true;
 		}
 	} else {
 		var neibhours = function(rand, lower, upper) {
 			for (var j = rand - lower; j < chromozomesPool.length
 					&& j <= rand + upper; j++) {
 
-				var distance = compare(verse, chromozomesPool[j]);
+				var distance = compare(tweet, chromozomesPool[j]);
 				var previouseDistance = 0;
 
 				if (j != rand) {
@@ -92,7 +95,7 @@ var chromozomeSelection = function(chromozomesPool) {
 
 		if (!verseSearch(tweet, chromozomesPool)) {
 			var len = chromozomesPool.length;
-			var keepChromozome = false;
+//			var keepChromozome = false;
 			var rand = Math.round(Math.random() * (chromozomesPool.length - 1));
 
 			switch (rand) {
@@ -115,10 +118,11 @@ var chromozomeSelection = function(chromozomesPool) {
 			}
 		}
 	}
+	return keepChromozome;
 }
 
 var mutation = function(chormozomesPool) {
-	var ratio = Math.floor(0.30 * (chormozomesPool.length - 1));
+	var ratio = Math.floor(1.0 * (chormozomesPool.length - 1));
 	var neibhours = function(verse, rand, lower, upper) {
 		var bestDistance = 0;
 		var index = 0;
@@ -178,12 +182,18 @@ var mutation = function(chormozomesPool) {
 			chormozomesPool.splice(rand1, 1);
 			chormozomesPool.splice(rand2, 0, chr);
 		}
-
 	}
 }
-
-evolve({
-		chromozomeSelection : chromozomeSelection,
-		mutation : mutation,
-	});
+	
+	if(tweet){
+		return evolve({
+			chromozomeSelection : chromozomeSelection,
+			mutation : mutation,
+		});
+	} else {
+		return evolve({
+			mutation : mutation,
+		});
+	}
+	
 };

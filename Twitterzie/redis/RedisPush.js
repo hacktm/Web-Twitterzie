@@ -10,15 +10,15 @@ client.on("error", function (err) {
 });
 
 module.exports.addVerse = function(verse){
-	client.sadd(redisSet, verse, redis.print);
+	client.sadd(redisSet, verse);
 }
 
 module.exports.addChr = function(chr){
-	client.sadd(pool, chr, redis.print);
+	client.sadd(pool, chr);
 }
 
 module.exports.addOut = function(outChr){
-	client.sadd(outstanding, outChr, redis.print);
+	client.sadd(outstanding, outChr);
 }
 
 module.exports.allVerse = function(callback){
@@ -43,6 +43,10 @@ module.exports.clearChr = function(callback){
 
 module.exports.clearOut = function(callback){
 	client.del(outstanding , callback);
+}
+
+module.exports.remOut = function(out, callback){
+	client.srem(outstanding, out);
 }
 
 module.exports.save = function(callback){

@@ -1,7 +1,19 @@
 var redis = require('./RedisPush.js');
 
-redis.allVerse(function(err, results){
-	console.log(results);
-});
+//redis.allVerse(function(err, results){
+//	console.log(results);
+//});
 
-//redis.clearSet();
+//redis.clearOut();
+//
+//redis.addOut('a');
+//
+//redis.allOut(function(err, results){
+//	console.log(results);
+//});
+//
+//redis.remOut('a');
+//
+//redis.allOut(function(err, results){
+//	console.log(results);
+//});
